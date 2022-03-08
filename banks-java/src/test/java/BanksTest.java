@@ -8,6 +8,7 @@ import Transactions.Withdraw;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -82,5 +83,28 @@ public class BanksTest {
         }
 
         assertEquals(8000, alexAccount.GetAmount());
+    }
+
+    @Test
+    public void TryWithdrawMoreThanHave() {
+        Bank tinkoff = _centralBank.CreateBank("Tinkoff");
+
+        tinkoff.SetCommission(10);
+        tinkoff.SetCreditLimit(5000);
+        tinkoff.SetDailyDepositePercent(5);
+        tinkoff.SetTransferLimit(1000);
+        tinkoff.SetWithdrawLimit(1000);
+        Client Alex = _clientBuilder
+                .AddName("Alex")
+                .AddSurname("Milkovich")
+                .AddPassport("8-800-555-35-35")
+                .AddAddress("Pomoyka 228")
+                .Build();
+
+        DebitAccount alexAccount = tinkoff.OpenDebitAccount(Alex);
+        assertThrows(Exception.class, () -> {
+            _centralBank.DoTransaction(new Replenishment(10000, Alex, tinkoff, alexAccount.GetId()));
+            _centralBank.DoTransaction(new Withdraw(Alex, 11000, tinkoff, alexAccount.GetId()));
+        });
     }
 }

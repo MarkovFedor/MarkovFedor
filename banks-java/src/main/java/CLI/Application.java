@@ -57,6 +57,9 @@ public class Application
                 case "/transaction":
                     ProvideTransaction();
                     break;
+                case "/getclients":
+                    _centralBank.GetRegistratedClients();
+                    break;
             }
         }
     }
