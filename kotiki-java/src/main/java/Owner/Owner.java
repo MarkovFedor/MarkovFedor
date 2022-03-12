@@ -1,4 +1,4 @@
-package Owners;
+package Owner;
 
 import Cats.Cat;
 

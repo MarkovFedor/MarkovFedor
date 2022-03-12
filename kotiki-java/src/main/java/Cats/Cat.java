@@ -1,57 +1,88 @@
 package Cats;
 
-import Owners.Owner;
+import Common.BaseEntity;
+import Owner.Owner;
 
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Cat {
+@Entity
+@Table(name="Cats")
+public class Cat extends BaseEntity {
+    @Id
+    @GeneratedValue
+    @Column(name="CAT_ID")
+    private long _id;
+
+    @Column(name = "Name")
     private String _name;
-    private Date _dateOfBirth;
-    private String _breed;
-    private Owner _owner;
-    private List<Cat> _friends;
 
+    @Column(name = "DateOfBirth")
+    private Date _dateOfBirth;
+
+    @Column(name = "Breed")
+    private String _breed;
+    @ManyToMany
+    private Set<Cat> _friends;
     public Cat() {
+        _friends = new HashSet<>();
+    }
+    public Cat(String name) {
+        this();
+        _name = name;
     }
 
-    public String get_name() {
+    @Override
+    public Long getId() {
+        return _id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        _id = id;
+    }
+
+    public String getName() {
         return _name;
     }
 
-    public void set_name(String _name) {
+    public void setName(String _name) {
         this._name = _name;
     }
 
-    public Date get_dateOfBirth() {
+    public Date getDateOfBirth() {
         return _dateOfBirth;
     }
 
-    public void set_dateOfBirth(Date _dateOfBirth) {
+    public void setDateOfBirth(Date _dateOfBirth) {
         this._dateOfBirth = _dateOfBirth;
     }
 
-    public String get_breed() {
+    public String getBreed() {
         return _breed;
     }
 
-    public void set_breed(String _breed) {
+    public void setBreed(String _breed) {
         this._breed = _breed;
     }
 
-    public Owner get_owner() {
-        return _owner;
-    }
-
-    public void set_owner(Owner _owner) {
-        this._owner = _owner;
-    }
-
-    public List<Cat> get_friends() {
+    public Set<Cat> getFriends() {
         return _friends;
     }
 
-    public void set_friends(List<Cat> _friends) {
+    public void setFriends(Set<Cat> _friends) {
         this._friends = _friends;
+    }
+
+    public void addFriend(Cat friend){
+        friend.getFriends().add(this);
+        _friends.add(friend);
+    }
+
+    @Override
+    public String toString() {
+        return _name;
     }
 }
