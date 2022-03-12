@@ -1,10 +1,11 @@
 package Cats;
 
+import Breeds.Breed;
 import Common.BaseEntity;
-import Owner.Owner;
+import Owners.Owner;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,10 +21,14 @@ public class Cat extends BaseEntity {
     private String _name;
 
     @Column(name = "DateOfBirth")
-    private Date _dateOfBirth;
+    private Calendar _dateOfBirth;
+
+    @Column(name = "Owners")
+    private Owner _owner;
 
     @Column(name = "Breed")
-    private String _breed;
+    @Enumerated(EnumType.STRING)
+    private Breed _breed;
     @ManyToMany
     private Set<Cat> _friends;
     public Cat() {
@@ -33,7 +38,13 @@ public class Cat extends BaseEntity {
         this();
         _name = name;
     }
-
+    public Cat(String name, Calendar dateOfBirth,Owner owner, Breed breed) {
+        this();
+        _name = name;
+        _dateOfBirth = dateOfBirth;
+        _owner = owner;
+        _breed = breed;
+    }
     @Override
     public Long getId() {
         return _id;
@@ -52,19 +63,28 @@ public class Cat extends BaseEntity {
         this._name = _name;
     }
 
-    public Date getDateOfBirth() {
+    public Calendar getDateOfBirth() {
         return _dateOfBirth;
     }
 
-    public void setDateOfBirth(Date _dateOfBirth) {
+    public void setDateOfBirth(Calendar _dateOfBirth) {
         this._dateOfBirth = _dateOfBirth;
     }
 
-    public String getBreed() {
+    public void setOwner(Owner owner) {
+        _owner = owner;
+        _owner.addCat(this);
+    }
+
+    public Owner getOwner() {
+        return _owner;
+    }
+
+    public Breed getBreed() {
         return _breed;
     }
 
-    public void setBreed(String _breed) {
+    public void setBreed(Breed _breed) {
         this._breed = _breed;
     }
 
