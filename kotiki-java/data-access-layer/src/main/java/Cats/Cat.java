@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="Cats")
+@Table(name= "Cats")
 public class Cat extends BaseEntity {
     @Id
     @GeneratedValue

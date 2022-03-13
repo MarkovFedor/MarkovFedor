@@ -1,7 +1,6 @@
 package Common;
 
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
