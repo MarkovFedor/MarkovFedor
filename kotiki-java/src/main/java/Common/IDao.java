@@ -7,4 +7,5 @@ public interface IDao<E extends BaseEntity> {
     void delete(E entity);
     List<E> findAll();
     void save(E entity);
+    E merge(E entity);
 }

@@ -3,6 +3,7 @@ package Cats;
 import Breeds.Breed;
 import Common.BaseEntity;
 import Owners.Owner;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -23,16 +24,19 @@ public class Cat extends BaseEntity {
     @Column(name = "DateOfBirth")
     private Calendar _dateOfBirth;
 
-    @Column(name = "Owners")
+    @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @JoinColumn(name = "owner_id")
     private Owner _owner;
 
     @Column(name = "Breed")
     @Enumerated(EnumType.STRING)
     private Breed _breed;
+
     @ManyToMany
-    private Set<Cat> _friends;
+    private Set<Cat> _friends = new HashSet<>();
     public Cat() {
-        _friends = new HashSet<>();
+
     }
     public Cat(String name) {
         this();
@@ -92,11 +96,7 @@ public class Cat extends BaseEntity {
         return _friends;
     }
 
-    public void setFriends(Set<Cat> _friends) {
-        this._friends = _friends;
-    }
-
-    public void addFriend(Cat friend){
+    public void addFriend(Cat friend) {
         friend.getFriends().add(this);
         _friends.add(friend);
     }

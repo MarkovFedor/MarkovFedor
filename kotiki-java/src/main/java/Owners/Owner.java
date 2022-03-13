@@ -4,6 +4,7 @@ import Cats.Cat;
 import Common.BaseEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 @Entity
@@ -19,9 +20,14 @@ public class Owner extends BaseEntity {
 
     @Column(name = "DateOfBirth")
     private Calendar _dateOfBirth;
-    @Column
-    @OneToMany(targetEntity = Cats.Cat.class, mappedBy = "cat")
-    private List<Cat> _cats;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id")
+    private List<Cat> _cats = new ArrayList<>();
+
+    public List<Cat> getCats() {
+        return _cats;
+    }
 
     public Owner() {
     }
@@ -55,10 +61,6 @@ public class Owner extends BaseEntity {
 
     public void setDateOfBirth(Calendar _dateOfBirth) {
         this._dateOfBirth = _dateOfBirth;
-    }
-
-    public List<Cat> getCats() {
-        return _cats;
     }
 
     public void addCat(Cat cat) {

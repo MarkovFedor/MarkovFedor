@@ -87,4 +87,21 @@ public class Dao<E extends BaseEntity> implements IDao<E>{
             throw e;
         }
     }
+
+    @Override
+    public E merge(E entity) {
+        Transaction tx = null;
+        E result = null;
+        try (var session = getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            result = (E) session.merge(entity);
+            tx.commit();
+        } catch(Exception e) {
+            if(tx != null) {
+                tx.rollback();
+            }
+            throw e;
+        }
+        return result;
+    }
 }
