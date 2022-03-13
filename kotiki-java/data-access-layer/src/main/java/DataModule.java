@@ -8,11 +8,11 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.GregorianCalendar;
 
-public class Main {
+public class DataModule {
     private static SessionFactory _sessionFactory;
     public static void main(String[] args) {
         _sessionFactory = new Configuration().configure().buildSessionFactory();
-        Main main = new Main();
+        DataModule main = new DataModule();
         System.out.println("Adding some cats and owners in DB");
 
         Owner owner0 = new Owner("Миша", new GregorianCalendar(2002, 4, 22));
