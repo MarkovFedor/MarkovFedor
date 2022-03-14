@@ -4,6 +4,9 @@ import Common.Dao;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CatDao extends Dao<Cat> implements ICatsDao {
     @Override
     public Cat findByName(String name) {

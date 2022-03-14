@@ -8,10 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
@@ -85,6 +82,39 @@ public class KotikiServiceTest {
 
         Cat expected = _catDao.find(id);
 
-        assertEquals(expected, id);
+        assertEquals(expected, cat);
+    }
+
+    @Test
+    public void shouldReturnFriendsOfCat() {
+        Cat cat = new Cat("Пушистик");
+        Cat cat1 = new Cat("Хвостик");
+        Cat cat2 = new Cat("Персик");
+        Cat cat3 = new Cat("Феликс");
+        Cat cat4 = new Cat("Ираклион");
+
+        Long id = cat.getId();
+
+        cat.addFriend(cat1);
+        cat.addFriend(cat2);
+        cat.addFriend(cat3);
+        cat.addFriend(cat4);
+
+        Set<Cat> friends = new HashSet<>();
+        friends.add(cat1);
+        friends.add(cat2);
+        friends.add(cat3);
+        friends.add(cat4);
+
+        given(_catDao.find(id)).willReturn(cat);
+
+        Set<Cat> expected = _catDao.find(id).getFriends();
+        Set<Cat> expected1 = new HashSet<>();
+        expected1.add(cat);
+        Set<Cat> expected2 = new HashSet<>();
+        expected2.add(cat);
+        assertEquals(expected, friends);
+        assertEquals(expected1, cat1.getFriends());
+        assertEquals(expected2, cat2.getFriends());
     }
 }
