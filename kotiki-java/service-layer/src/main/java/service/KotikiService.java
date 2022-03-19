@@ -1,9 +1,9 @@
-package Service;
+package service;
 
-import Cats.Cat;
-import Cats.CatDao;
-import Owners.Owner;
-import Owners.OwnerDao;
+import cats.Cat;
+import cats.CatDao;
+import owner.Owner;
+import owner.OwnerDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +29,8 @@ public class KotikiService implements IKotikiService{
     }
 
     @Override
-    public List<Cat> findFriendsOfCat(String name) {
-        var cat = _catDao.findByName(name);
+    public List<Cat> findFriendsOfCat(Long id) {
+        var cat = _catDao.findById(id);
         return new ArrayList<>(cat.getFriends());
     }
 

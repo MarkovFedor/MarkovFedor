@@ -1,9 +1,8 @@
-import Breeds.Breed;
-import Cats.Cat;
-import Cats.CatDao;
-import Owners.Owner;
-import Owners.OwnerDao;
-import Service.KotikiService;
+import breeds.Breed;
+import cats.Cat;
+import cats.CatDao;
+import owner.Owner;
+import owner.OwnerDao;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;

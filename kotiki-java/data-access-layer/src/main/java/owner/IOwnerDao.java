@@ -1,9 +1,8 @@
-package Owners;
+package owner;
 
-import Common.IDao;
+import common.IDao;
 
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public interface IOwnerDao extends IDao<Owner> {
     Owner findByName(String name);

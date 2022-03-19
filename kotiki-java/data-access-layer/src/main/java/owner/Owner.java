@@ -1,14 +1,14 @@
-package Owners;
+package owner;
 
-import Cats.Cat;
-import Common.BaseEntity;
+import cats.Cat;
+import common.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 @Entity
-@Table(name = "Owners")
+@Table(name = "owner")
 public class Owner extends BaseEntity {
     @Id
     @GeneratedValue

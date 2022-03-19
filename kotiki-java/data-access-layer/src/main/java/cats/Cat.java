@@ -1,8 +1,8 @@
-package Cats;
+package cats;
 
-import Breeds.Breed;
-import Common.BaseEntity;
-import Owners.Owner;
+import breeds.Breed;
+import common.BaseEntity;
+import owner.Owner;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name= "Cats")
+@Table(name= "cats")
 public class Cat extends BaseEntity {
     @Id
     @GeneratedValue

@@ -1,14 +1,12 @@
-import Breeds.Breed;
-import Cats.Cat;
-import Cats.CatDao;
-import Owners.Owner;
-import Owners.OwnerDao;
+import breeds.Breed;
+import cats.Cat;
+import cats.CatDao;
+import owner.Owner;
+import owner.OwnerDao;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class DataModule {
     private static SessionFactory _sessionFactory;

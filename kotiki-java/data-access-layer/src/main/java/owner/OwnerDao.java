@@ -1,10 +1,9 @@
-package Owners;
+package owner;
 
-import Common.Dao;
+import common.Dao;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -12,7 +11,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class OwnerDao extends Dao<Owner> implements IOwnerDao{
     @Override

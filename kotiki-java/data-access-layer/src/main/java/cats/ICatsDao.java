@@ -1,8 +1,6 @@
-package Cats;
+package cats;
 
-import Common.IDao;
-
-import java.util.List;
+import common.IDao;
 
 public interface ICatsDao extends IDao<Cat> {
     Cat findByName(String name);

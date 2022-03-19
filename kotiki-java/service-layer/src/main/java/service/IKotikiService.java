@@ -1,7 +1,7 @@
-package Service;
+package service;
 
-import Cats.Cat;
-import Owners.Owner;
+import cats.Cat;
+import owner.Owner;
 
 import java.util.List;
 

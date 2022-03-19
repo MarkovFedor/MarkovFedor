@@ -1,11 +1,12 @@
-import Cats.CatDao;
-import Owners.OwnerDao;
-import Service.KotikiService;
+import cats.CatDao;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import owner.OwnerDao;
+import service.KotikiService;
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        CatDao catDao = new CatDao();
-        OwnerDao ownerDao = new OwnerDao();
-        KotikiService service = new KotikiService(catDao, ownerDao);
+        SpringApplication.run(Main.class, args);
     }
 }

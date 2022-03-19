@@ -1,11 +1,8 @@
-package Cats;
+package cats;
 
-import Common.Dao;
+import common.Dao;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CatDao extends Dao<Cat> implements ICatsDao {
     @Override
