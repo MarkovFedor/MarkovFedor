@@ -16,10 +16,10 @@ public class Owner extends BaseEntity {
     private long _id;
 
     @Column(name = "NAME")
-    private String _name;
+    private String name;
 
     @Column(name = "DateOfBirth")
-    private Calendar _dateOfBirth;
+    private Calendar dateOfBirth;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id")
@@ -33,8 +33,8 @@ public class Owner extends BaseEntity {
     }
 
     public Owner(String name, Calendar dateOfBirth) {
-        _name = name;
-        _dateOfBirth = dateOfBirth;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
@@ -48,19 +48,19 @@ public class Owner extends BaseEntity {
     }
 
     public String getName() {
-        return _name;
+        return name;
     }
 
-    public void setName(String _name) {
-        this._name = _name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Calendar getDateOfBirth() {
-        return _dateOfBirth;
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(Calendar _dateOfBirth) {
-        this._dateOfBirth = _dateOfBirth;
+        this.dateOfBirth = _dateOfBirth;
     }
 
     public void addCat(Cat cat) {

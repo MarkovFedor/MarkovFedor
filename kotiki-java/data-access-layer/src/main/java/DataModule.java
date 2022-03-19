@@ -6,7 +6,9 @@ import Owners.OwnerDao;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class DataModule {
     private static SessionFactory _sessionFactory;
@@ -17,6 +19,10 @@ public class DataModule {
 
         Owner owner0 = new Owner("Миша", new GregorianCalendar(2002, 4, 22));
         Owner owner1 = new Owner("Володя", new GregorianCalendar(2001, 3, 10));
+
+        OwnerDao ownerDao = new OwnerDao();
+        ownerDao.save(owner0);
+        ownerDao.save(owner1);
 
         Cat cat0 = new Cat("Пушистик", new GregorianCalendar(2018, 0,0),owner0, Breed.Abyssian);
         Cat cat1 = new Cat("Снежок", new GregorianCalendar(2020, 9,4),owner0, Breed.American_Shorthair);
@@ -37,8 +43,7 @@ public class DataModule {
         catDao.merge(cat2);
         catDao.merge(cat3);
 
-        OwnerDao ownerDao = new OwnerDao();
-        ownerDao.save(owner0);
-        ownerDao.save(owner1);
+        Owner list = ownerDao.findByNameAndDateOfBirth("миша", new GregorianCalendar(2002,4,22));
+        System.out.println(list.getName());
     }
 }
