@@ -16,93 +16,93 @@ public class Cat extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name="CAT_ID")
-    private long _id;
+    private long id;
 
     @Column(name = "Name")
-    private String _name;
+    private String name;
 
     @Column(name = "DateOfBirth")
-    private Calendar _dateOfBirth;
+    private Calendar dateOfBirth;
 
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "owner_id")
-    private Owner _owner;
+    private Owner owner;
 
     @Column(name = "Breed")
     @Enumerated(EnumType.STRING)
-    private Breed _breed;
+    private Breed breed;
 
     @ManyToMany
-    private Set<Cat> _friends = new HashSet<>();
+    private Set<Cat> friends = new HashSet<>();
     public Cat() {
 
     }
     public Cat(String name) {
         this();
-        _name = name;
+        this.name = name;
     }
     public Cat(String name, Calendar dateOfBirth,Owner owner, Breed breed) {
         this();
-        _name = name;
-        _dateOfBirth = dateOfBirth;
-        _owner = owner;
-        _breed = breed;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.owner = owner;
+        this.breed = breed;
     }
     @Override
     public Long getId() {
-        return _id;
+        return id;
     }
 
     @Override
     public void setId(Long id) {
-        _id = id;
+        this.id = id;
     }
 
     public String getName() {
-        return _name;
+        return name;
     }
 
     public void setName(String _name) {
-        this._name = _name;
+        this.name = name;
     }
 
     public Calendar getDateOfBirth() {
-        return _dateOfBirth;
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(Calendar _dateOfBirth) {
-        this._dateOfBirth = _dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public void setOwner(Owner owner) {
-        _owner = owner;
-        _owner.addCat(this);
+        this.owner = owner;
+        this.owner.addCat(this);
     }
 
     public Owner getOwner() {
-        return _owner;
+        return owner;
     }
 
     public Breed getBreed() {
-        return _breed;
+        return breed;
     }
 
     public void setBreed(Breed _breed) {
-        this._breed = _breed;
+        this.breed = breed;
     }
 
     public Set<Cat> getFriends() {
-        return _friends;
+        return friends;
     }
 
     public void addFriend(Cat friend) {
         friend.getFriends().add(this);
-        _friends.add(friend);
+        friends.add(friend);
     }
 
     @Override
     public String toString() {
-        return _name;
+        return name;
     }
 }

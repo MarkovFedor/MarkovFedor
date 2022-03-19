@@ -13,7 +13,7 @@ public class Owner extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "OWNER_ID")
-    private long _id;
+    private long id;
 
     @Column(name = "NAME")
     private String name;
@@ -23,10 +23,10 @@ public class Owner extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id")
-    private List<Cat> _cats = new ArrayList<>();
+    private List<Cat> cats = new ArrayList<>();
 
     public List<Cat> getCats() {
-        return _cats;
+        return cats;
     }
 
     public Owner() {
@@ -39,12 +39,12 @@ public class Owner extends BaseEntity {
 
     @Override
     public Long getId() {
-        return _id;
+        return id;
     }
 
     @Override
     public void setId(Long id) {
-        _id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -64,11 +64,11 @@ public class Owner extends BaseEntity {
     }
 
     public void addCat(Cat cat) {
-        if(!_cats.contains(cat)) {
-            _cats.add(cat);
+        if(!cats.contains(cat)) {
+            cats.add(cat);
         }
     }
     public void setCats(List<Cat> _cats) {
-        this._cats = _cats;
+        this.cats = _cats;
     }
 }

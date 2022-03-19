@@ -19,8 +19,25 @@ public class OwnerDao extends Dao<Owner> implements IOwnerDao{
     public Owner findByName(String name) {
         Transaction tx = null;
         Owner result;
-        try(var session = getSessionFactory().openSession()) {
+        try {
+            Session session = null;
+            try {
+                session = getSessionFactory().getCurrentSession();
+            } catch(HibernateException e) {
+                session = getSessionFactory().openSession();
+            }
             tx = session.beginTransaction();
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Owner> cr = cb.createQuery(Owner.class);
+            Root<Owner> root = cr.from(Owner.class);
+            Predicate[] predicates = new Predicate[1];
+            predicates[0] = cb.equal(
+                    cb.upper(root.get("name")), name.toUpperCase());
+            cr.select(root).where(predicates);
+
+            Query<Owner> query = session.createQuery(cr);
+
+            result = query.getSingleResult();
             tx.commit();
         } catch(Exception e) {
             if(tx != null) {
@@ -28,7 +45,7 @@ public class OwnerDao extends Dao<Owner> implements IOwnerDao{
             }
             throw e;
         }
-        return null;
+        return result;
     }
 
     @Override
