@@ -1,5 +1,6 @@
 package entities;
 
+import com.sun.istack.NotNull;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -17,9 +18,11 @@ public class Cat {
     private long id;
 
     @Column(name = "Name")
+    @NotNull
     private String name;
 
     @Column(name = "DateOfBirth")
+    @NotNull
     private Calendar dateOfBirth;
 
     @ManyToOne
@@ -60,7 +63,7 @@ public class Cat {
         return name;
     }
 
-    public void setName(String _name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -68,7 +71,7 @@ public class Cat {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Calendar _dateOfBirth) {
+    public void setDateOfBirth(Calendar dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -85,7 +88,7 @@ public class Cat {
         return breed;
     }
 
-    public void setBreed(Breed _breed) {
+    public void setBreed(Breed breed) {
         this.breed = breed;
     }
 

@@ -1,5 +1,7 @@
 package entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,9 +16,11 @@ public class Owner {
     private long id;
 
     @Column(name = "Name")
+    @NotNull
     private String name;
 
     @Column(name = "DateOfBirth")
+    @NotNull
     private Calendar dateOfBirth;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import entities.Owner;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,19 +60,19 @@ public class KotikiController {
         return new ResponseEntity(owners, HttpStatus.OK);
     }
 
-    @PostMapping("/createcat")
+    @PostMapping("/add/cat")
     public ResponseEntity createCat(@RequestBody CatDTO catDTO) {
         Long id = null;
         try {
             Cat cat = catDtoMapping.mapToEntity(catDTO);
             id = kotikiService.saveNewCat(cat);
-        } catch(Exception e) {
+        } catch (ParseException e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity(id, HttpStatus.CREATED);
     }
 
-    @PostMapping("/createowner")
+    @PostMapping("/add/owner")
     public ResponseEntity createOwner(@RequestBody OwnerDTO ownerDTO) {
         Long id = null;
         try {
@@ -94,5 +95,55 @@ public class KotikiController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity(catDTO, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/delete/owner/{id}")
+    public ResponseEntity deleteOwner(@PathVariable Long id) {
+        kotikiService.deleteOwnerById(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/delete/cat/{id}")
+    public ResponseEntity deleteCat(@PathVariable Long id) {
+        kotikiService.deleteCatById(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/delete/cat/all")
+    public ResponseEntity deleteAllCats() {
+        kotikiService.deleteAllCats();
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/delete/owner/all")
+    public ResponseEntity deleteAllOwners() {
+        kotikiService.deleteAllOwners();
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/cat/{id}/addfriend/{friendId}")
+    public ResponseEntity addFriendToCat(
+            @PathVariable Long id,
+            @PathVariable Long friendId
+    ) {
+        try {
+            kotikiService.addFriend(id, friendId);
+        } catch (NotFoundByIdException e) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/owner/{id}/addcat/{catId}")
+    public ResponseEntity addCatToOwner(
+            @PathVariable Long id,
+            @PathVariable Long catId
+    ) {
+        try {
+            kotikiService.addCat(id, catId);
+        } catch (NotFoundByIdException e) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

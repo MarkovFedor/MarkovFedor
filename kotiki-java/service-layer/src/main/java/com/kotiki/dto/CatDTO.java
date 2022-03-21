@@ -10,7 +10,7 @@ public class CatDTO {
     private String name;
     private Breed breed;
     private Long ownerId;
-    private Calendar dateOfBirth;
+    private String dateOfBirth;
     private Set<Long> friendsId;
 
     public CatDTO() {
@@ -59,11 +59,11 @@ public class CatDTO {
         }
     }
 
-    public Calendar getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Calendar dateOfBirth){
+    public void setDateOfBirth(String dateOfBirth){
         this.dateOfBirth = dateOfBirth;
     }
 }

@@ -10,6 +10,7 @@ import dao.IOwnerDao;
 import entities.Owner;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @ComponentScan("common")
@@ -42,6 +43,7 @@ public class KotikiService {
 
     public Long saveNewCat(Cat cat) {
         catsDao.save(cat);
+        System.out.println(cat.getName());
         return cat.getId();
     }
 
@@ -53,6 +55,7 @@ public class KotikiService {
     public void deleteCatById(Long id) {
         catsDao.deleteById(id);
     }
+
     public void deleteOwnerById(Long id) {
         ownerDao.deleteById(id);
     }
@@ -65,5 +68,33 @@ public class KotikiService {
     public List<Owner> getAllOwners() {
         List<Owner> owners = ownerDao.findAll();
         return owners;
+    }
+
+    public void deleteAllCats() {
+        catsDao.deleteAll();
+    }
+
+    public void deleteAllOwners() {
+        ownerDao.deleteAll();
+    }
+
+    public void addFriend(Long id, Long friendId) throws NotFoundByIdException {
+        Optional<Cat> cat = catsDao.findById(id);
+        Optional<Cat> friend = catsDao.findById(friendId);
+        if(cat.isPresent() & friend.isPresent()) {
+            cat.get().addFriend(friend.get());
+        } else {
+            throw new NotFoundByIdException("Not found lol ahahah");
+        }
+    }
+
+    public void addCat(Long id, Long catId) throws NotFoundByIdException {
+        Optional<Owner> owner = ownerDao.findById(id);
+        Optional<Cat> cat = catsDao.findById(catId);
+        if(owner.isPresent() & cat.isPresent()) {
+            owner.get().addCat(cat.get());
+        } else {
+            throw new NotFoundByIdException("Not found lol ahahha");
+        }
     }
 }
