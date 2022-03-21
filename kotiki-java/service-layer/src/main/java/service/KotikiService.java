@@ -1,71 +1,66 @@
 package service;
 
-import breeds.Breed;
 import cats.Cat;
-import cats.CatDao;
+import cats.ICatsDao;
+import common.BaseEntity;
+import common.IDao;
 import exceptions.NotFoundByIdException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import owner.IOwnerDao;
 import owner.Owner;
-import owner.OwnerDao;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 
-public class KotikiService implements IKotikiService{
+@Service
+@Component
+public class KotikiService {
 
-    private final CatDao _catDao;
-    private final OwnerDao _ownerDao;
+    @Autowired
+    private IOwnerDao ownerDao;
 
-    public KotikiService(CatDao catDao,OwnerDao ownerDao) {
-        _catDao = catDao;
-        _ownerDao = ownerDao;
-    }
+    @Autowired
+    private ICatsDao catsDao;
 
-    @Override
-    public List<Cat> findAllCats() {
-        return _catDao.findAll();
-    }
+    @Autowired
+    private IDao dao;
 
-    @Override
-    public List<Owner> findAllOwners() {
-        return _ownerDao.findAll();
-    }
+    public KotikiService() {}
 
-    @Override
-    public List<Cat> findFriendsOfCat(String name) {
-        return null;
-    }
-
-    @Override
-    public List<Cat> findFriendsOfCat(Long id) throws NotFoundByIdException {
-        var cat = _catDao.find(id);
+    public Cat findCatById(Long id) throws NotFoundByIdException {
+        Cat cat = catsDao.find(id);
         if(cat == null) {
-            throw new NotFoundByIdException("Owner или cat не найдены");
+            throw new NotFoundByIdException("Не найден");
         }
-        return new ArrayList<>(cat.getFriends());
+        return cat;
     }
 
-    @Override
-    public List<Cat> findAllCatsOfOwner(String name) {
-        var owner = _ownerDao.findByName(name);
-        return new ArrayList<>(owner.getCats());
+    public Owner findOwnerById(Long id) throws NotFoundByIdException {
+        Owner owner = ownerDao.find(id);
+        if(owner == null) {
+            throw new NotFoundByIdException("Не найден");
+        }
+        return owner;
     }
 
-    @Override
-    public Long createNewCat(String name, GregorianCalendar dateOfBirth, Breed breed, Long ownerId) {
-        return null;
+    public Long saveNewEntity(BaseEntity entity) {
+        dao.save(entity);
+        return entity.getId();
     }
 
-    @Override
-    public Long createNewOwner(String name, GregorianCalendar dateOfBirth) {
-
+    public void deleteById(Long id) {
+        dao.deleteById(id);
     }
 
-    public List<Cat> findAllCatsByCriteria(String name, Breed breed, GregorianCalendar dateOfBirth) {
-
+    public List<Cat> getAllCats() {
+        List<Cat> cats = catsDao.findAll();
+        return cats;
     }
 
-    public List<Owner> findAllOwnersByCriteria(String name, GregorianCalendar dateOfBirth) {
-
+    public List<Owner> getAllOwners() {
+        List<Owner> owners = ownerDao.findAll();
+        return owners;
     }
 }

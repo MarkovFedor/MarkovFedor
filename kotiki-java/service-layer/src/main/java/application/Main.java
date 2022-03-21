@@ -1,8 +1,7 @@
-import cats.CatDao;
+package application;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import owner.OwnerDao;
-import service.KotikiService;
 
 @SpringBootApplication
 public class Main {

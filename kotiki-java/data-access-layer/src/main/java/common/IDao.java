@@ -1,11 +1,13 @@
 package common;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import org.yaml.snakeyaml.events.Event;
+
 import java.util.List;
 
-public interface IDao<E extends BaseEntity> {
+@Repository
+public interface IDao<E extends BaseEntity> extends JpaRepository<E, Long> {
     E find(Long id);
-    void delete(E entity);
-    List<E> findAll();
-    void save(E entity);
-    E merge(E entity);
 }
