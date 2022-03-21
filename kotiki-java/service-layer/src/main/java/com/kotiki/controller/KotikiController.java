@@ -1,28 +1,24 @@
-package controller;
+package com.kotiki.controller;
 
-import breeds.Breed;
-import cats.Cat;
-import com.sun.istack.NotNull;
-import dto.CatDTO;
-import dto.OwnerDTO;
-import exceptions.IncorrectCatParamsException;
-import exceptions.NotFoundByIdException;
+import entities.Cat;
+import com.kotiki.dto.CatDTO;
+import com.kotiki.dto.OwnerDTO;
+import com.kotiki.exceptions.NotFoundByIdException;
+import com.kotiki.service.KotikiService;
+import com.kotiki.utils.CatDtoMapping;
+import com.kotiki.utils.OwnerDtoMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import owner.Owner;
-import service.KotikiService;
-import utils.CatDtoMapping;
-import utils.OwnerDtoMapping;
+import entities.Owner;
 
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/kotiki/")
-public class Controller {
+@Controller
+public class KotikiController {
 
     @Autowired
     private KotikiService kotikiService;
@@ -33,6 +29,14 @@ public class Controller {
     @Autowired
     private CatDtoMapping catDtoMapping;
 
+    public KotikiController() {
+
+    }
+
+    @GetMapping("/")
+    public ResponseEntity testEmptyPath() {
+        return new ResponseEntity(HttpStatus.OK);
+    }
     @GetMapping("/cats")
     public ResponseEntity getAllCats() {
         List<Cat> cats = kotikiService.getAllCats();

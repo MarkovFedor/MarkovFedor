@@ -1,31 +1,30 @@
-package service;
+package com.kotiki.service;
 
-import cats.Cat;
-import cats.ICatsDao;
-import common.BaseEntity;
-import common.IDao;
-import exceptions.NotFoundByIdException;
+import entities.Cat;
+import dao.ICatsDao;
+import entities.BaseEntity;
+import dao.IDao;
+import com.kotiki.exceptions.NotFoundByIdException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-import owner.IOwnerDao;
-import owner.Owner;
+import dao.IOwnerDao;
+import entities.Owner;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@Component
+@ComponentScan("common")
 public class KotikiService {
+    @Autowired
+    private IDao daoBase;
 
     @Autowired
     private IOwnerDao ownerDao;
 
     @Autowired
     private ICatsDao catsDao;
-
-    @Autowired
-    private IDao dao;
 
     public KotikiService() {}
 
@@ -46,12 +45,12 @@ public class KotikiService {
     }
 
     public Long saveNewEntity(BaseEntity entity) {
-        dao.save(entity);
+        daoBase.save(entity);
         return entity.getId();
     }
 
     public void deleteById(Long id) {
-        dao.deleteById(id);
+        daoBase.deleteById(id);
     }
 
     public List<Cat> getAllCats() {

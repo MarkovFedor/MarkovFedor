@@ -1,8 +1,5 @@
-package cats;
+package entities;
 
-import breeds.Breed;
-import common.BaseEntity;
-import owner.Owner;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;

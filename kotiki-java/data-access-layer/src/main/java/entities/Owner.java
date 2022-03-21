@@ -1,7 +1,7 @@
-package owner;
+package entities;
 
-import cats.Cat;
-import common.BaseEntity;
+import entities.Cat;
+import entities.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;

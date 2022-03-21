@@ -1,8 +1,8 @@
-package service;
+package com.kotiki.service;
 
-import breeds.Breed;
-import cats.Cat;
-import owner.Owner;
+import entities.Breed;
+import entities.Cat;
+import entities.Owner;
 
 import java.util.GregorianCalendar;
 import java.util.List;

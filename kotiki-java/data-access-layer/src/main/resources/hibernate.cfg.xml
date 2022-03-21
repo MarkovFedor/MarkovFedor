@@ -36,8 +36,8 @@
         </property>
 
         <!-- Annotated entity classes --><!-- Annotated entity classes -->
-        <mapping class="cats.Cat"/>
-        <mapping class="owner.Owner"/>
+        <mapping class="entities.Cat"/>
+        <mapping class="entities.Owner"/>
 
     </session-factory>
 </hibernate-configuration>

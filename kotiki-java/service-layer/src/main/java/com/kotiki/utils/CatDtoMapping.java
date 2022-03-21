@@ -1,11 +1,10 @@
-package utils;
+package com.kotiki.utils;
 
-import cats.Cat;
-import common.IDao;
-import dto.CatDTO;
+import entities.Cat;
+import com.kotiki.dto.CatDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import owner.IOwnerDao;
+import dao.IOwnerDao;
 
 @Service
 public class CatDtoMapping{

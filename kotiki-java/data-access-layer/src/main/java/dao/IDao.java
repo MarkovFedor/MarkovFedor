@@ -1,13 +1,13 @@
-package common;
+package dao;
 
+import entities.BaseEntity;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import org.yaml.snakeyaml.events.Event;
-
-import java.util.List;
 
 @Repository
+@Primary
 public interface IDao<E extends BaseEntity> extends JpaRepository<E, Long> {
     E find(Long id);
 }

@@ -1,4 +1,4 @@
-package breeds;
+package entities;
 
 public enum Breed {
     Abyssian,

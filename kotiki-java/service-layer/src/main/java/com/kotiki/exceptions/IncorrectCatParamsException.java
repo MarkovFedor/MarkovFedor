@@ -1,4 +1,4 @@
-package exceptions;
+package com.kotiki.exceptions;
 
 public class IncorrectCatParamsException extends Exception{
     public IncorrectCatParamsException(String message) {

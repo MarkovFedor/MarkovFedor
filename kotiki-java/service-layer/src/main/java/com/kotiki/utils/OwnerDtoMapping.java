@@ -1,7 +1,7 @@
-package utils;
+package com.kotiki.utils;
 
-import dto.OwnerDTO;
-import owner.Owner;
+import com.kotiki.dto.OwnerDTO;
+import entities.Owner;
 
 public class OwnerDtoMapping {
     public OwnerDTO mapToDTO(Owner owner) {

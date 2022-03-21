@@ -1,7 +1,7 @@
-package dto;
+package com.kotiki.dto;
 
-import breeds.Breed;
-import cats.Cat;
+import entities.Breed;
+import entities.Cat;
 
 import java.util.*;
 
