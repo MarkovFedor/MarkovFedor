@@ -9,7 +9,7 @@ import java.util.List;
 public class OwnerDTO {
     private Long id;
     private String name;
-    private Calendar dateOfBirth;
+    private String dateOfBirth;
     private List<Long> catsId;
 
     public OwnerDTO() {
@@ -32,11 +32,11 @@ public class OwnerDTO {
         this.name = name;
     }
 
-    public Calendar getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Calendar dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

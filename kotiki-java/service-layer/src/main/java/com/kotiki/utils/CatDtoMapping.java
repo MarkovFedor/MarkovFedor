@@ -26,7 +26,10 @@ public class CatDtoMapping{
         catDTO.setOwnerId(cat.getOwner()!=null?cat.getOwner().getId():null);
         catDTO.setFriendsId(cat.getFriends());
         catDTO.setBreed(cat.getBreed());
-        catDTO.setDateOfBirth(cat.getDateOfBirth().toString());
+        String dateString = cat.getDateOfBirth().get(Calendar.DAY_OF_MONTH)
+                +"-"+cat.getDateOfBirth().get(Calendar.MONTH)
+                +"-"+cat.getDateOfBirth().get(Calendar.YEAR);
+        catDTO.setDateOfBirth(dateString);
         return catDTO;
     }
 
