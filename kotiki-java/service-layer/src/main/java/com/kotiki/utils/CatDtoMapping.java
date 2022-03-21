@@ -28,7 +28,7 @@ public class CatDtoMapping{
         cat.setId(catDTO.getId());
         cat.setName(catDTO.getName());
         cat.setDateOfBirth(catDTO.getDateOfBirth());
-        cat.setOwner(ownerDao.find(catDTO.getOwnerId()));
+        cat.setOwner(ownerDao.findById(catDTO.getOwnerId()).orElse(null));
         return cat;
     }
 }

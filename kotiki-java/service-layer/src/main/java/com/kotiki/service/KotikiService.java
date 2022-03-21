@@ -2,11 +2,8 @@ package com.kotiki.service;
 
 import entities.Cat;
 import dao.ICatsDao;
-import entities.BaseEntity;
-import dao.IDao;
 import com.kotiki.exceptions.NotFoundByIdException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import dao.IOwnerDao;
@@ -18,9 +15,6 @@ import java.util.List;
 @ComponentScan("common")
 public class KotikiService {
     @Autowired
-    private IDao daoBase;
-
-    @Autowired
     private IOwnerDao ownerDao;
 
     @Autowired
@@ -29,7 +23,8 @@ public class KotikiService {
     public KotikiService() {}
 
     public Cat findCatById(Long id) throws NotFoundByIdException {
-        Cat cat = catsDao.find(id);
+        Cat cat = catsDao.findById(id)
+                .orElse(null);
         if(cat == null) {
             throw new NotFoundByIdException("Не найден");
         }
@@ -37,20 +32,29 @@ public class KotikiService {
     }
 
     public Owner findOwnerById(Long id) throws NotFoundByIdException {
-        Owner owner = ownerDao.find(id);
+        Owner owner = ownerDao.findById(id)
+                .orElse(null);
         if(owner == null) {
             throw new NotFoundByIdException("Не найден");
         }
         return owner;
     }
 
-    public Long saveNewEntity(BaseEntity entity) {
-        daoBase.save(entity);
-        return entity.getId();
+    public Long saveNewCat(Cat cat) {
+        catsDao.save(cat);
+        return cat.getId();
     }
 
-    public void deleteById(Long id) {
-        daoBase.deleteById(id);
+    public Long saveNewOwner(Owner owner) {
+        ownerDao.save(owner);
+        return owner.getId();
+    }
+
+    public void deleteCatById(Long id) {
+        catsDao.deleteById(id);
+    }
+    public void deleteOwnerById(Long id) {
+        ownerDao.deleteById(id);
     }
 
     public List<Cat> getAllCats() {

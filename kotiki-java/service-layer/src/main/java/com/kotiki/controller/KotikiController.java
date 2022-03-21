@@ -8,6 +8,7 @@ import com.kotiki.service.KotikiService;
 import com.kotiki.utils.CatDtoMapping;
 import com.kotiki.utils.OwnerDtoMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@ComponentScan("com.kotiki.utils")
 public class KotikiController {
 
     @Autowired
@@ -62,7 +64,7 @@ public class KotikiController {
         Long id = null;
         try {
             Cat cat = catDtoMapping.mapToEntity(catDTO);
-            id = kotikiService.saveNewEntity(cat);
+            id = kotikiService.saveNewCat(cat);
         } catch(Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -74,7 +76,7 @@ public class KotikiController {
         Long id = null;
         try {
             Owner owner = ownerDtoMapping.mapToEntity(ownerDTO);
-            id = kotikiService.saveNewEntity(owner);
+            id = kotikiService.saveNewOwner(owner);
         }catch(Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }

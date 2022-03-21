@@ -1,21 +1,19 @@
 package entities;
 
-import entities.Cat;
-import entities.BaseEntity;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 @Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table(name = "owner")
-public class Owner extends BaseEntity {
+public class Owner {
     @Id
     @GeneratedValue
-    @Column(name = "OWNER_ID")
+    @Column(name="CAT_ID")
     private long id;
 
-    @Column(name = "NAME")
+    @Column(name = "Name")
     private String name;
 
     @Column(name = "DateOfBirth")
@@ -32,18 +30,11 @@ public class Owner extends BaseEntity {
     public Owner() {
     }
 
-    public Owner(String name, Calendar dateOfBirth) {
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    @Override
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    @Override
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

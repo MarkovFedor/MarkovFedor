@@ -2,7 +2,9 @@ package com.kotiki.utils;
 
 import com.kotiki.dto.OwnerDTO;
 import entities.Owner;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OwnerDtoMapping {
     public OwnerDTO mapToDTO(Owner owner) {
         OwnerDTO ownerDTO = new OwnerDTO();

@@ -8,8 +8,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name= "cats")
-public class Cat extends BaseEntity {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Table(name= "cat")
+public class Cat {
     @Id
     @GeneratedValue
     @Column(name="CAT_ID")
@@ -46,12 +47,11 @@ public class Cat extends BaseEntity {
         this.owner = owner;
         this.breed = breed;
     }
-    @Override
+
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
