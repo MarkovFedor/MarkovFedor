@@ -73,7 +73,7 @@ public class CatsController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("/{id}/addfriend/{friendId}")
+    @PostMapping("/{id}/friends/add/{friendId}")
     public ResponseEntity addFriendToCat(
             @PathVariable Long id,
             @PathVariable Long friendId
