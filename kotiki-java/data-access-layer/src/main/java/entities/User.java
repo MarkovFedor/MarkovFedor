@@ -9,13 +9,14 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
-@Table(name="user")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Table(name="users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
 
-    private Owner owner;
+    private Long ownerId;
     private String username;
     private String password;
 
@@ -32,12 +33,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public Long getOwner() {
+        return ownerId;
     }
 
     public void setOwner(Owner owner) {
-        this.owner = owner;
+        this.ownerId = ownerId;
     }
 
     public void setLogin(String username) {

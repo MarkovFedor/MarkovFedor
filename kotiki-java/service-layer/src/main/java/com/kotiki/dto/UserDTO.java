@@ -1,13 +1,23 @@
 package com.kotiki.dto;
 
+import com.sun.istack.NotNull;
 import entities.Role;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserDTO {
     private Long id;
     private Long ownerId;
-    private Set<Role> roles;
+    @NotNull
+    private String username;
+    @NotNull
+    private String password;
+    private Set<String> roles;
+
+    public UserDTO() {
+        roles = new HashSet<>();
+    }
 
     public Long getId() {
         return id;
@@ -25,11 +35,21 @@ public class UserDTO {
         this.ownerId = ownerId;
     }
 
-    public Set<Role> getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setRoles(Set<Role> rolesOfEntity) {
+        for(Role role: rolesOfEntity) {
+            roles.add(role.getName());
+        }
     }
 }

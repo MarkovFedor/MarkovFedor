@@ -54,6 +54,7 @@ public class OwnerController {
 
     @PostMapping("/add")
     public ResponseEntity createOwner(@RequestBody OwnerDTO ownerDTO) {
+        System.out.println("Here");
         Long id = null;
         try {
             Owner owner = ownerDtoMapping.mapToEntity(ownerDTO);
