@@ -35,6 +35,10 @@ public class UserDTO {
         this.ownerId = ownerId;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public Set<String> getRoles() {
         return roles;
     }

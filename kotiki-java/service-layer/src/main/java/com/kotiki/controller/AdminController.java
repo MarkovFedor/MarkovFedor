@@ -8,25 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/kotiki/user")
-public class UserController {
+@RequestMapping("/kotiki/admin")
+public class AdminController {
     @Autowired
     private UserService service;
 
     @Autowired
     private UserDtoMapping userDTOMapping;
-    public UserController() {}
+    public AdminController() {}
 
     @GetMapping("/all")
     public ResponseEntity getAllUsers() {

@@ -37,7 +37,7 @@ public class User implements UserDetails {
         return ownerId;
     }
 
-    public void setOwner(Owner owner) {
+    public void setOwner(Long ownerId) {
         this.ownerId = ownerId;
     }
 
