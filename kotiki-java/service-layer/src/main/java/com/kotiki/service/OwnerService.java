@@ -62,4 +62,17 @@ public class OwnerService {
             throw new NotFoundByIdException("Not found lol ahahha");
         }
     }
+
+    public void deleteCatFromOwner(Long id, Long catId) throws NotFoundByIdException {
+        Optional<Owner> owner = ownerDao.findById(id);
+        if(owner.isEmpty()) {
+            throw new NotFoundByIdException("Not found");
+        }
+        Optional<Cat> cat = catsDao.findById(catId);
+        if(cat.isPresent()) {
+            owner.get().getCats().remove(cat.get());
+            ownerDao.save(owner.get());
+            catsDao.save(cat.get());
+        }
+    }
 }
