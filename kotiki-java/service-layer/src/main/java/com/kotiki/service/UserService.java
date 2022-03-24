@@ -1,10 +1,12 @@
 package com.kotiki.service;
 
 import com.kotiki.dto.UserDTO;
+import com.kotiki.exceptions.NotFoundByIdException;
 import com.kotiki.exceptions.UserWithUsernameExistsException;
 import com.kotiki.utils.UserDtoMapping;
 import dao.IRoleDao;
 import dao.IUserDao;
+import entities.Role;
 import entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -62,5 +64,16 @@ public class UserService implements UserDetailsService {
         }
         userDao.save(user);
         return user.getId();
+    }
+
+    public void giveRole(Long id, Long roleId) throws NotFoundByIdException {
+        Optional<Role> role = roleDao.findById(roleId);
+        Optional<User> user = userDao.findById(id);
+        if(role.isPresent() & user.isPresent()) {
+            user.get().addRole(role.get());
+        } else {
+            throw new NotFoundByIdException("Not found");
+        }
+        userDao.save(user.get());
     }
 }

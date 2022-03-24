@@ -21,8 +21,12 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
-                                        .and()
-                                                .formLogin();
+                .and()
+                .authorizeRequests()
+                .antMatchers("/kotiki/admin/*").hasRole("ADMIN")
+                .antMatchers("/*").authenticated()
+                .and()
+                .formLogin();
         http.csrf().disable();
     }
 }
