@@ -2,6 +2,8 @@ package com.kotiki.controller;
 
 import com.kotiki.dto.UserDTO;
 import com.kotiki.exceptions.NotFoundByIdException;
+import com.kotiki.service.CatsService;
+import com.kotiki.service.OwnerService;
 import com.kotiki.service.UserService;
 import com.kotiki.utils.UserDtoMapping;
 import entities.User;
@@ -30,10 +32,16 @@ public class AdminController {
 
     @Autowired
     private UserDtoMapping userDTOMapping;
+
+    @Autowired
+    private CatsService catsService;
+
+    @Autowired
+    private OwnerService ownerService;
+
     public AdminController() {}
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity getAllUsers() {
         List<UserDTO> users = service.allUsers()
                 .stream()
@@ -42,7 +50,7 @@ public class AdminController {
         return new ResponseEntity(users, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity getUser(@PathVariable Long id) {
         User user = null;
         UserDTO userDTO = null;
@@ -55,12 +63,6 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/getid")
-    public ResponseEntity getName(Principal principal) {
-        String username = principal.getName();
-        return new ResponseEntity(username, HttpStatus.OK);
-    }
-
     @PostMapping("/giverole/{id}/{roleid}")
     public ResponseEntity giveRole(@PathVariable Long id, @PathVariable Long roleId) {
         try {
@@ -69,5 +71,17 @@ public class AdminController {
         } catch (NotFoundByIdException e) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping("/cats/all/delete")
+    public ResponseEntity deleteAllCats() {
+        catsService.deleteAllCats();
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/owners/all/delete")
+    public ResponseEntity deleteAllOwners() {
+        ownerService.deleteAllOwners();
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

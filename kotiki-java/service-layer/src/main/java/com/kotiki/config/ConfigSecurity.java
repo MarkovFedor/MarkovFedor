@@ -23,8 +23,8 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter {
         http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/kotiki/admin/*").hasRole("ADMIN")
-                .antMatchers("/*").authenticated()
+                .antMatchers("/kotiki/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/**").authenticated()
                 .and()
                 .formLogin();
         http.csrf().disable();

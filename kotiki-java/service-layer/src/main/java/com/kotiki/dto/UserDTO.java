@@ -51,6 +51,10 @@ public class UserDTO {
         this.username = username;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setRoles(Set<Role> rolesOfEntity) {
         for(Role role: rolesOfEntity) {
             roles.add(role.getName());
