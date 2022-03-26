@@ -28,10 +28,12 @@ public class OwnerDtoMapping {
         owner.setCats(null);
         owner.setName(ownerDTO.getName());
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = sdf.parse(ownerDTO.getDateOfBirth());
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        owner.setDateOfBirth(cal);
+        if(ownerDTO.getDateOfBirth() != null) {
+            Date date = sdf.parse(ownerDTO.getDateOfBirth());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            owner.setDateOfBirth(cal);
+        }
         return owner;
     }
 }

@@ -1,11 +1,14 @@
 package com.kotiki.controller;
 
+import com.kotiki.dto.OwnerDTO;
 import com.kotiki.dto.UserDTO;
 import com.kotiki.exceptions.NotFoundByIdException;
 import com.kotiki.service.CatsService;
 import com.kotiki.service.OwnerService;
 import com.kotiki.service.UserService;
+import com.kotiki.utils.OwnerDtoMapping;
 import com.kotiki.utils.UserDtoMapping;
+import entities.Owner;
 import entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -15,12 +18,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,9 @@ public class AdminController {
 
     @Autowired
     private OwnerService ownerService;
+
+    @Autowired
+    private OwnerDtoMapping ownerDtoMapping;
 
     public AdminController() {}
 

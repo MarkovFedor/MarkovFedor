@@ -1,5 +1,6 @@
 package com.kotiki.service;
 
+import com.kotiki.dto.OwnerDTO;
 import com.kotiki.exceptions.NotFoundByIdException;
 import dao.ICatsDao;
 import dao.IOwnerDao;
@@ -7,6 +8,8 @@ import entities.Cat;
 import entities.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
