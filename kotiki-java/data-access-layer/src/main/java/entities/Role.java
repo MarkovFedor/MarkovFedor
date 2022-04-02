@@ -1,7 +1,9 @@
 package entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -9,12 +11,14 @@ import java.util.Set;
 
 @Entity
 @Table(name="role")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property  = "id",
+        scope     = Long.class)
 public class Role implements GrantedAuthority {
     @Id
     private Long id;
     private String name;
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-    @JsonBackReference
     private Set<User> users;
 
     public Role() {

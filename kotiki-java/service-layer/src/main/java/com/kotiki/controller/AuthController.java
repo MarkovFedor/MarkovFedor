@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
     @Autowired
     private UserService userService;
-    @PostMapping("/register")
+
+    @PostMapping(value = "/register", consumes = {"*/*"})
     public ResponseEntity registerNewUser(@RequestBody UserDTO userDTO) {
         Long id = null;
         try {

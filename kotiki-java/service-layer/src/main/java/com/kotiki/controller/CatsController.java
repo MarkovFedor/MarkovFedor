@@ -6,6 +6,7 @@ import com.kotiki.exceptions.NotFoundByIdException;
 import com.kotiki.service.CatsService;
 import com.kotiki.service.UserService;
 import com.kotiki.utils.CatDtoMapping;
+import entities.Breed;
 import entities.Cat;
 import entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class CatsController {
 
     @PostMapping("/add")
     public ResponseEntity createCat(@RequestBody CatDTO catDTO) {
+        System.out.println(catDTO.getDateOfBirth());
         Long id = null;
         try {
             Cat cat = catDtoMapping.mapToEntity(catDTO);
@@ -107,5 +109,12 @@ public class CatsController {
         } catch (AccessToStrangersEntityException e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/getbybreed/{breed}")
+    public ResponseEntity getCatsByBreed(@PathVariable Breed breed) {
+        List<Cat> cats = catsService.getAllCatsByBreed(breed);
+        List<CatDTO> result = cats.stream().map(i -> catDtoMapping.mapToDTO(i)).collect(Collectors.toList());
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 }

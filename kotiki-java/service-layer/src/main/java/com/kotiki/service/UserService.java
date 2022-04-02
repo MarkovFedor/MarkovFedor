@@ -97,6 +97,8 @@ public class UserService implements UserDetailsService {
     }
 
     public void deleteOwnerOfUser(User user) {
+        user.setOwner(null);
+        userDao.save(user);
         Long ownerId = user.getOwner();
         ownerDao.deleteById(ownerId);
     }

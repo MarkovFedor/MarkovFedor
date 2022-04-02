@@ -3,6 +3,7 @@ package com.kotiki.service;
 import com.kotiki.exceptions.NotFoundByIdException;
 import dao.ICatsDao;
 import dao.IOwnerDao;
+import entities.Breed;
 import entities.Cat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -58,5 +59,10 @@ public class CatsService {
         } else {
             throw new NotFoundByIdException("Not found lol ahahah");
         }
+    }
+
+    public List<Cat> getAllCatsByBreed(Breed breed) {
+        List<Cat> result = catsDao.findAllByBreed(breed);
+        return result;
     }
 }
