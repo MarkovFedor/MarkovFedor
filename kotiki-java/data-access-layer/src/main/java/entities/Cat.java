@@ -1,8 +1,6 @@
-package Cats;
+package entities;
 
-import Breeds.Breed;
-import Common.BaseEntity;
-import Owners.Owner;
+import com.sun.istack.NotNull;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -11,17 +9,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name= "Cats")
-public class Cat extends BaseEntity {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Table(name= "cat")
+public class Cat {
     @Id
     @GeneratedValue
     @Column(name="CAT_ID")
     private long id;
 
     @Column(name = "Name")
+    @NotNull
     private String name;
 
     @Column(name = "DateOfBirth")
+    @NotNull
     private Calendar dateOfBirth;
 
     @ManyToOne
@@ -49,12 +50,11 @@ public class Cat extends BaseEntity {
         this.owner = owner;
         this.breed = breed;
     }
-    @Override
+
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -63,7 +63,7 @@ public class Cat extends BaseEntity {
         return name;
     }
 
-    public void setName(String _name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -71,7 +71,7 @@ public class Cat extends BaseEntity {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Calendar _dateOfBirth) {
+    public void setDateOfBirth(Calendar dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -88,7 +88,7 @@ public class Cat extends BaseEntity {
         return breed;
     }
 
-    public void setBreed(Breed _breed) {
+    public void setBreed(Breed breed) {
         this.breed = breed;
     }
 
